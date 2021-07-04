@@ -1,4 +1,4 @@
-package main
+package client
 
 import (
 	"fmt"
@@ -7,12 +7,14 @@ import (
 	"github.com/ethereum/go-ethereum/ethclient"
 )
 
-func main() {
+func (client *ethclient.Client) connect() (*ethclient.Client, error) {
 	client, err := ethclient.Dial("https://rpc-testnet.bitkubchain.io")
 	if err != nil {
 		log.Fatal(err)
 	}
 
-	fmt.Println("we have a connection")
+	fmt.Println("We are connected!")
 	_ = client // we'll use this in the upcoming sections
+
+	return client, nil
 }

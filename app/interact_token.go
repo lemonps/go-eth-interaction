@@ -10,7 +10,7 @@ import (
 	"github.com/ethereum/go-ethereum/common"
 	"github.com/ethereum/go-ethereum/ethclient"
 
-	token "github.com/lemonsuy/go-eth-interaction/token" // for demo
+	token "go-interaction/token" // for demo
 )
 
 func main() {
@@ -19,14 +19,14 @@ func main() {
 		log.Fatal(err)
 	}
 
-	// Golem (GNT) Address
-	tokenAddress := common.HexToAddress("0xa74476443119A942dE498590Fe1f2454d7D4aC0d")
+	tokenAddress := common.HexToAddress("0x0759a85e6a66Aba7BD2B7A91bbfed65d55094D76")
 	instance, err := token.NewToken(tokenAddress, client)
 	if err != nil {
 		log.Fatal(err)
 	}
 
-	address := common.HexToAddress("0x0536806df512d6cdde913cf95c9886f65b1d3462")
+	address := common.HexToAddress("0xB23068c6412CBE7bd94db54A5176Cc23222B3356")
+
 	bal, err := instance.BalanceOf(&bind.CallOpts{}, address)
 	if err != nil {
 		log.Fatal(err)
@@ -47,15 +47,14 @@ func main() {
 		log.Fatal(err)
 	}
 
-	fmt.Printf("name: %s\n", name)         // "name: Golem Network"
-	fmt.Printf("symbol: %s\n", symbol)     // "symbol: GNT"
-	fmt.Printf("decimals: %v\n", decimals) // "decimals: 18"
-
-	fmt.Printf("wei: %s\n", bal) // "wei: 74605500647408739782407023"
+	fmt.Printf("name: %s\n", name)
+	fmt.Printf("symbol: %s\n", symbol)
+	fmt.Printf("decimals: %v\n", decimals)
+	fmt.Printf("wei: %s\n", bal)
 
 	fbal := new(big.Float)
 	fbal.SetString(bal.String())
 	value := new(big.Float).Quo(fbal, big.NewFloat(math.Pow10(int(decimals))))
 
-	fmt.Printf("balance: %f", value) // "balance: 74605500.647409"
+	fmt.Printf("balance: %f", value)
 }

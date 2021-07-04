@@ -11,7 +11,7 @@ import (
 	"github.com/ethereum/go-ethereum/ethclient"
 )
 
-func main() {
+func getBalance() {
 	client, err := ethclient.Dial("https://rpc-testnet.bitkubchain.io")
 	if err != nil {
 		log.Fatal(err)
